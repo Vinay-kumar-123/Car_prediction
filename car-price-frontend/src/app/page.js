@@ -21,7 +21,7 @@ export default function Home() {
 
   // Load dropdown data
   useEffect(() => {
-    fetch("http://127.0.0.1:8000/options")
+    fetch("https://car-prediction-jtsa.onrender.com/options")
       .then(res => res.json())
       .then(data => {
         setCompanies(data.companies);
@@ -38,7 +38,7 @@ export default function Home() {
     setForm({ ...form, company, name: "" });
 
     try {
-      const res = await fetch(`http://127.0.0.1:8000/cars/${company}`);
+      const res = await fetch(`https://car-prediction-jtsa.onrender.com/cars/${company}`);
       const data = await res.json();
       setCars(data);
     } catch {
@@ -56,7 +56,7 @@ export default function Home() {
     setPrice(null);
 
     try {
-      const res = await fetch("http://127.0.0.1:8000/predict", {
+      const res = await fetch("https://car-prediction-jtsa.onrender.com/predict", {
         method: "POST",
         headers: {
           "Content-Type": "application/json"

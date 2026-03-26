@@ -12,7 +12,12 @@ from fastapi.middleware.cors import CORSMiddleware
 
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["*"],
+     allow_origins=[
+        "http://localhost:3000",
+        "http://127.0.0.1:3000"
+        
+    ],
+    allow_origin_regex=r"https://.*\.vercel\.app",
     allow_methods=["*"],
     allow_headers=["*"],
 )
@@ -35,7 +40,7 @@ def predict(data: CarInput):
     df = pd.DataFrame([data.model_dump()])
     pred = model.predict(df)
 
-    final_price = np.expm1(pred)  # SAFE
+    final_price = np.expm1(pred)  
 
     return {"predicted_price": float(final_price[0])}
 
